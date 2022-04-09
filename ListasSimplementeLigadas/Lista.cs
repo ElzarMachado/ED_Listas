@@ -44,6 +44,7 @@ namespace ListasSimplementeLigadas
             nodoActual.Enlace = nodoNuevo;
         }
         public Nodo Buscar(string dato)
+
         {
             if (ValidaVacio() == false)
             {
@@ -59,6 +60,53 @@ namespace ListasSimplementeLigadas
                
             }
             return null;
+        }
+        public Nodo BuscarPorIndice(int indice)
+        {
+            int Indice = -1;
+            if(ValidaVacio() == false)
+            {
+                Nodo nodoBusqueda = nodoInicial;
+                while(nodoBusqueda.Enlace != null)
+                {
+                    nodoBusqueda = nodoBusqueda.Enlace;
+                    Indice++;
+                    if(Indice == indice)
+                    {
+                        return nodoBusqueda; 
+                    }
+                }
+            }
+            return null;
+        }
+        public Nodo BuscarAnterior(string dato)
+        {
+            if(ValidaVacio() == false)
+            {
+                Nodo nodoBusqueda = nodoInicial;
+                while(nodoBusqueda.Enlace != null && nodoBusqueda.Enlace.Valor != dato)
+                {
+                    nodoBusqueda = nodoBusqueda.Enlace;
+                    if (nodoBusqueda.Enlace.Valor == dato)
+                    {
+                        return nodoBusqueda;
+                    }
+                }
+            }
+            return null;
+        }
+        public void BorrarNodo(string dato)
+        {
+            if (ValidaVacio() == false)
+            {
+                nodoActual = Buscar(dato);
+                if(nodoActual != null)
+                {
+                    Nodo nodoAnterior = BuscarAnterior(dato);
+                    nodoAnterior.Enlace = nodoActual.Enlace;
+                    nodoActual.Enlace = null;
+                }
+            }
         }
     }
 }
